@@ -2,7 +2,7 @@
 
 Code, data and per-fold results for the paper
 
-> **Monotone Confidence Weights in Weighted Fuzzy-Rough Attribute Reduction: A Characterisation and the Fixed-Confidence Fuzzy Purity Measure**
+> **Fixed-Confidence Fuzzy Purity: Monotone Confidence Weights for Fuzzy-Rough Attribute Reduction**
 > Pham Van Duong, Tran Thanh Dai, Nguyen Nhu Son
 
 Every table and figure of the experimental section can be regenerated from the files in `results/r1/` with the two scripts in `scripts/make_*`. The raw results can be regenerated with the experiment scripts listed below.
@@ -41,7 +41,7 @@ All runners are resumable and append to their output file in `results/r1/`.
 
 | Experiment | Command | Output |
 |------------|---------|--------|
-| Main comparison | `python3 scripts/run_r1.py --datasets <names> --timeout 3600 --out raw_long.csv` | `raw_long.csv`, `raw_long_b.csv` (Madelon, Electrical) |
+| Main comparison | `python3 scripts/run_r1.py --datasets <names> --timeout 3600 --out raw_long.csv` | `raw_long.csv`, `raw_long_b.csv` (Madelon, Electrical), `raw_long_c.csv` (Isolet) |
 | SFRS at the FCFP size | `python3 scripts/run_r1.py --datasets <names> --methods SFRS-eq --timeout 3600 --out raw_sfrs_eq.csv --seed_from raw_long.csv --seed_methods FCFP` | `raw_sfrs_eq.csv`, `raw_sfrs_eq_b.csv` |
 | Monotonicity, random nested pairs and greedy runs | `python3 scripts/monotonicity_r1.py --datasets <names> --tag A` (r ≤ 60); add `--b1_max 30` for r > 60 (`--tag C`) | `monotonicity_pairs_*.csv`, `monotonicity_greedy_*.csv` |
 | Search with hybrid weights | `--methods FCFPa@0.0 FCFPa@0.25 FCFPa@0.5 FCFPa@0.75` | `raw_adaptive.csv` |
@@ -62,7 +62,7 @@ python3 scripts/make_extra_r1.py    # monotonicity, hybrid weights, delta, scree
 
 ## Result files
 
-Each row of `raw_*.csv` has: `dataset, method, fold, n_train, n_test, p, status, size, reduct, acc_svm, acc_knn, acc_mean, time_reduct, time_eval, note`. `reduct` lists the selected attribute indices (0-based columns of the CSV), `time_reduct` is the reduction time in seconds without classifier training, and `status` is `ok` or `timeout`. `isolet_fold0_runtime.csv` holds one fold of Isolet, which is not in the main comparison.
+Each row of `raw_*.csv` has: `dataset, method, fold, n_train, n_test, p, status, size, reduct, acc_svm, acc_knn, acc_mean, time_reduct, time_eval, note`. `reduct` lists the selected attribute indices (0-based columns of the CSV), `time_reduct` is the reduction time in seconds without classifier training, and `status` is `ok` or `timeout`. Rows with the note `from preflight_fold0.csv` were copied from a first run of fold 0 on every dataset, made with the same code and protocol before the other folds. The first run of Isolet used twelve parallel jobs and FCFP exceeded the one-hour limit on fold 0 (a fold that had taken 3094 s with a lighter load); its rows are kept in `superseded_rows.csv`, and all ten folds were rerun with six parallel jobs.
 
 ## Data sources
 

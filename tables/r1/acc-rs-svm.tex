@@ -1,6 +1,6 @@
 \begin{minipage}{\linewidth}
 \centering
-\captionof{table}{SVM test accuracy (\%, mean $\pm$ std over ten folds) of the rough-set reducers. Full: all attributes. Bold: best reducer. --: more than 1\,h on the first fold.}
+\captionof{table}{SVM test accuracy (\%, mean $\pm$ std over ten folds) of the rough-set reducers. Full: all attributes. Bold: best reducer. --: more than 1\,h on the first fold. The last two rows use only the methods that finished on all datasets.}
 \label{tab:acc-rs-svm}
 \resizebox{\linewidth}{!}{%
 \scriptsize
@@ -30,6 +30,7 @@ Arrhythmia & $60.6 \pm 2.5$ & $60.8 \pm 4.4$ & $61.5 \pm 5.3$ & $57.7 \pm 3.7$ &
 Semeion & $95.3 \pm 1.6$ & $73.5 \pm 4.0$ & $10.0 \pm 0.0$ & $76.1 \pm 4.5$ & -- & -- & $76.2 \pm 6.8$ & $\mathbf{79.3} \pm 1.8$ \\
 Mfeat-factors & $97.3 \pm 1.3$ & $\mathbf{95.6} \pm 2.2$ & $91.2 \pm 2.7$ & $87.1 \pm 3.6$ & -- & -- & $57.0 \pm 27.8$ & $95.0 \pm 1.7$ \\
 Madelon & $59.4 \pm 2.2$ & $72.5 \pm 3.2$ & $66.2 \pm 6.2$ & $\mathbf{80.4} \pm 8.0$ & -- & -- & $50.3 \pm 2.9$ & $62.0 \pm 13.1$ \\
+Isolet & $96.5 \pm 0.7$ & $\mathbf{72.1} \pm 2.4$ & $71.1 \pm 1.9$ & $37.7 \pm 4.6$ & -- & -- & $30.7 \pm 7.4$ & -- \\
 \midrule
 Colon & $86.9 \pm 13.1$ & $80.7 \pm 12.8$ & $80.7 \pm 18.7$ & $78.8 \pm 20.6$ & $\mathbf{87.1} \pm 13.1$ & -- & $64.8 \pm 4.0$ & $81.0 \pm 16.0$ \\
 Leukemia & $87.3 \pm 12.5$ & $90.2 \pm 11.7$ & $80.4 \pm 13.6$ & $88.6 \pm 14.8$ & $\mathbf{94.3} \pm 7.4$ & -- & $66.8 \pm 6.3$ & $84.3 \pm 14.2$ \\
@@ -38,8 +39,8 @@ Prostate & $90.0 \pm 10.5$ & $\mathbf{93.0} \pm 6.7$ & $87.2 \pm 10.5$ & $89.0 \
 GLI-85 & $87.2 \pm 6.2$ & $85.7 \pm 11.4$ & $\mathbf{88.1} \pm 7.9$ & $76.5 \pm 9.0$ & -- & -- & $70.8 \pm 7.3$ & $69.6 \pm 4.8$ \\
 SMK-CAN-187 & $70.0 \pm 12.7$ & $\mathbf{69.5} \pm 9.8$ & $59.9 \pm 14.7$ & $62.6 \pm 7.6$ & -- & -- & $56.1 \pm 12.3$ & $49.7 \pm 10.8$ \\
 \midrule
-Average & $83.8$ & $82.4$ & $75.1$ & $79.0$ & -- & -- & $67.3$ & $77.1$ \\
-Avg.\ rank & -- & $1.92$ & $2.65$ & $3.02$ & -- & -- & $4.50$ & $2.92$ \\
+Average & $84.3$ & $82.0$ & $74.9$ & $77.4$ & -- & -- & $65.8$ & -- \\
+Avg.\ rank & -- & $1.54$ & $2.12$ & $2.56$ & -- & -- & $3.78$ & -- \\
 \bottomrule
 \end{tabular}%
 }

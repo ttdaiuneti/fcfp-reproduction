@@ -50,8 +50,8 @@ TAIL = [r"\bottomrule", r"\end{tabular}", r"\end{minipage}\par"]
 
 
 # ---------------------------------------------------------------- monotonicity
-MEAS = [("FCFP-fixed", r"$\alpha{=}1$"), ("FCFP-hybrid-0.75", "$0.75$"), ("FCFP-hybrid-0.5", "$0.5$"),
-        ("FCFP-hybrid-0.25", "$0.25$"), ("FCFP-adaptive", "$0$"), ("WFRS", "WFRS"), ("SFRS", "SFRS")]
+MEAS = [("FCFP-fixed", r"1 (FCFP)"), ("FCFP-hybrid-0.75", "$0.75$"), ("FCFP-hybrid-0.5", "$0.5$"),
+        ("FCFP-hybrid-0.25", "$0.25$"), ("FCFP-adaptive", "0 (adaptive)"), ("WFRS", "WFRS"), ("SFRS", "SFRS")]
 
 
 def mono_table():
@@ -59,15 +59,16 @@ def mono_table():
     c = pd.read_csv(os.path.join(R, "monotonicity_pairs_C.csv"))
     rows = []
     for ds in ORDER:
-        src = ab if ab[ab.dataset == ds].p.iloc[0] <= 60 else c
+        in_ab = (ab.dataset == ds).any()
+        src = ab if in_ab and ab[ab.dataset == ds].p.iloc[0] <= 60 else c
         rows.append(src[src.dataset == ds].assign(src="AB" if src is ab else "C"))
     d = pd.concat(rows)
     assert set(d.dataset) == set(ORDER) and (d.pairs == 200).all()
     v = d.pivot(index="dataset", columns="measure", values="violations")
     L = head(r"Monotonicity violations among 200 random nested pairs $B_1\subset B_2$ per dataset. "
-             r"The FCFP columns differ only in the weight $\omega_\alpha$; $\alpha=1$ is FCFP and $\alpha=0$ the adaptive scheme.",
+             r"The first five columns differ only in the weights $\omega_\alpha$ of Eq.~\eqref{eq:hybrid-omega}.",
              "tab:mono", len(MEAS))
-    L += [r" & \multicolumn{5}{c}{FCFP with weights $\omega_\alpha$} & & \\ \cmidrule(lr){2-6}",
+    L += [r" & \multicolumn{5}{c}{weights $\omega_\alpha$, value of $\alpha$} & & \\ \cmidrule(lr){2-6}",
           "Dataset & " + " & ".join(h for _, h in MEAS) + r" \\", r"\midrule"]
     for gi, (_, g) in enumerate(GROUPS):
         for ds in g:
@@ -98,7 +99,7 @@ def greedy_stats():
 
 
 # ------------------------------------------------------ adaptive -> accuracy
-ALPHAS = [("FCFP", r"$1$"), ("FCFPa@0.75", "$0.75$"), ("FCFPa@0.5", "$0.5$"), ("FCFPa@0.25", "$0.25$"), ("FCFPa@0.0", "$0$")]
+ALPHAS = [("FCFP", r"1 (FCFP)"), ("FCFPa@0.75", "$0.75$"), ("FCFPa@0.5", "$0.5$"), ("FCFPa@0.25", "$0.25$"), ("FCFPa@0.0", "0 (adaptive)")]
 
 
 def adaptive_table():
@@ -113,13 +114,14 @@ def adaptive_table():
     sd = (100 * d.groupby(["dataset", "method"]).acc_svm.std()).unstack()
     sz = d.groupby(["dataset", "method"])["size"].mean().unstack()
     L = head(r"SVM accuracy (\%, mean $\pm$ std) and mean reduct size (in parentheses) with the weights $\omega_\alpha$. "
-             r"Algorithm~\ref{alg:forward-backward} and all other settings are unchanged; $\alpha=1$ is FCFP.",
+             r"Algorithm~\ref{alg:forward-backward} and all other settings are unchanged. Bold: the search stopped after one attribute in most folds.",
              "tab:adaptive", len(ALPHAS))
     L += [r" & \multicolumn{5}{c}{$\alpha$} \\ \cmidrule(lr){2-6}",
           "Dataset & " + " & ".join(h for _, h in ALPHAS) + r" \\", r"\midrule"]
     for x in ds:
-        L.append(NAME[x] + " & " + " & ".join(rf"${mu.loc[x, m]:.1f} \pm {sd.loc[x, m]:.1f}$ ({sz.loc[x, m]:.1f})"
-                                              for m, _ in ALPHAS) + r" \\")
+        cell = lambda m: (rf"$\mathbf{{{mu.loc[x, m]:.1f}}} \pm {sd.loc[x, m]:.1f}$ (\textbf{{{sz.loc[x, m]:.1f}}})" if sz.loc[x, m] <= 1.5
+                          else rf"${mu.loc[x, m]:.1f} \pm {sd.loc[x, m]:.1f}$ ({sz.loc[x, m]:.1f})")
+        L.append(NAME[x] + " & " + " & ".join(cell(m) for m, _ in ALPHAS) + r" \\")
     write(os.path.join(TAB, "adaptive.tex"), L + TAIL)
     knn = (100 * d.groupby(["dataset", "method"]).acc_knn.mean()).unstack()
     return mu, sz, knn
@@ -127,29 +129,53 @@ def adaptive_table():
 
 # ------------------------------------------------------------- delta
 def delta_table():
+    """Two panels side by side: small and medium datasets left, the others right."""
     dl = pd.read_csv(os.path.join(R, "raw_delta.csv"))
     main = load_rows(); main = main[main.method == "FCFP"]
-    rows = []
-    L = head(r"FCFP with the absolute scale $\delta=0.3$ and with $\delta$ set to $0.3$ times the median pairwise distance in $C$: "
-             r"SVM accuracy (\%) and mean reduct size. `--': not finished within one hour.",
-             "tab:delta", 4)
-    L += [r" & \multicolumn{2}{c}{$\delta=0.3$} & \multicolumn{2}{c}{median-based $\delta$} \\ \cmidrule(lr){2-3}\cmidrule(lr){4-5}",
-          r"Dataset & Acc. & $|R|$ & Acc. & $|R|$ \\", r"\midrule"]
-    for gi, (_, g) in enumerate(GROUPS):
+    rows, cells = [], {}
+    for _, g in GROUPS:
         for ds in g:
             a = main[main.dataset == ds]; b = dl[dl.dataset == ds]
             assert len(a) == 10 and len(b) == 10, ds
-            ca = rf"${100 * a.acc_svm.mean():.1f}$ & ${a['size'].mean():.1f}$"
+            ca = [f"${100 * a.acc_svm.mean():.1f}$", f"${a['size'].mean():.1f}$"]
             if (b.status == "ok").sum() == 10:
-                cb = rf"${100 * b.acc_svm.mean():.1f}$ & ${b['size'].mean():.1f}$"
+                cb = [f"${100 * b.acc_svm.mean():.1f}$", f"${b['size'].mean():.1f}$"]
                 rows.append((ds, 100 * a.acc_svm.mean(), 100 * b.acc_svm.mean(), a["size"].mean(), b["size"].mean(),
                              a.time_reduct.mean(), b.time_reduct.mean()))
             else:
                 assert (b.status == "timeout").all(), ds
-                cb = r"-- & --"
-            L.append(NAME[ds] + " & " + ca + " & " + cb + r" \\")
-        if gi < len(GROUPS) - 1:
-            L.append(r"\midrule")
+                cb = ["--", "--"]
+            cells[ds] = " & ".join([NAME[ds]] + ca + cb)
+    left = [g for name, g in GROUPS if name in ("Small", "Medium")]
+    right = [g for name, g in GROUPS if name not in ("Small", "Medium")]
+    def column(groups):
+        out = []
+        for g in groups:
+            out += [cells[d] for d in g]
+        return out
+    Lc, Rc = column(left), column(right)
+    n = max(len(Lc), len(Rc)); Lc += [""] * (n - len(Lc)); Rc += [""] * (n - len(Rc))
+    blank = " & & & & "
+    L = [r"\begin{minipage}{\linewidth}", r"\centering",
+         r"\captionof{table}{FCFP with the absolute scale $\delta=0.3$ and with $\delta$ set to $0.3$ times the median pairwise distance in $C$: "
+         r"SVM accuracy (\%) and mean reduct size. `--': not finished within one hour.}",
+         r"\label{tab:delta}", r"\footnotesize", r"\setlength{\tabcolsep}{4pt}",
+         r"\begin{tabular}{@{}lrrrr@{\hspace{14pt}}lrrrr@{}}", r"\toprule",
+         r" & \multicolumn{2}{c}{$\delta=0.3$} & \multicolumn{2}{c}{median-based} & & \multicolumn{2}{c}{$\delta=0.3$} & \multicolumn{2}{c}{median-based} \\",
+         r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){7-8}\cmidrule(lr){9-10}",
+         r"Dataset & Acc. & $|R|$ & Acc. & $|R|$ & Dataset & Acc. & $|R|$ & Acc. & $|R|$ \\", r"\midrule"]
+    for a, b in zip(Lc, Rc):
+        if a is None or b is None:
+            # a separator on one side only: draw a partial rule on that side
+            ra = r"\cmidrule(r){1-5}" if a is None else ""
+            rb = r"\cmidrule(l){6-10}" if b is None else ""
+            if a is None and b is None:
+                L.append(r"\midrule"); continue
+            other = b if a is None else a
+            L.append(ra + rb)
+            L.append((blank + " & " + other if a is None else other + " & " + blank) + r" \\")
+            continue
+        L.append((a or blank) + " & " + (b or blank) + r" \\")
     write(os.path.join(TAB, "delta.tex"), L + TAIL)
     return pd.DataFrame(rows, columns=["dataset", "acc_abs", "acc_med", "size_abs", "size_med", "t_abs", "t_med"]).set_index("dataset")
 
@@ -183,16 +209,19 @@ def curve(d, key):
 
 def scal_figure():
     s = pd.read_csv(os.path.join(R, "scalability.csv")); m = pd.read_csv(os.path.join(R, "scalability_m.csv"))
-    panels = [("(a) Letter, $r=16$", curve(s[s.dataset == "letter"], "n"), r"$n$"),
-              ("(b) Magic, $r=10$", curve(s[s.dataset == "magic"], "n"), r"$n$"),
-              ("(c) SMK-CAN-187, $n=187$", curve(m, "m"), r"$r$")]
+    nt = r"xtick={2500,5000,10000,20000}, xticklabels={2.5k,5k,10k,20k}"
+    rt = r"xtick={1000,2500,5000,10000,20000}, xticklabels={1k,2.5k,5k,10k,20k}"
+    panels = [("(a) Letter, $r=16$", curve(s[s.dataset == "letter"], "n"), r"number of objects $n$", nt, 2),
+              ("(b) Magic, $r=10$", curve(s[s.dataset == "magic"], "n"), r"number of objects $n$", nt, 2),
+              ("(c) SMK-CAN-187, $n=187$", curve(m, "m"), r"number of attributes $r$", rt, 1)]
     L = [r"\begin{minipage}{\linewidth}", r"\centering", r"\begin{tikzpicture}",
-         r"\begin{groupplot}[group style={group size=3 by 1, horizontal sep=1.1cm}, width=0.37\linewidth, height=0.33\linewidth,",
-         r"  xmode=log, ymode=log, log basis x=10, tick label style={font=\scriptsize}, label style={font=\scriptsize},",
-         r"  title style={font=\scriptsize}, ylabel style={yshift=-3pt}, grid=major, grid style={gray!20}, every axis plot/.append style={mark size=1.4pt}]"]
-    for i, (title, c, xl) in enumerate(panels):
-        L.append(rf"\nextgroupplot[title={{{title}}}, xlabel={{{xl}}}" + (r", ylabel={Reduction time (s)}" if i == 0 else "")
-                 + (r", legend to name=scallegend, legend columns=7, legend style={font=\scriptsize, draw=none}" if i == 0 else "") + "]")
+         r"\begin{groupplot}[group style={group size=3 by 1, horizontal sep=0.9cm}, width=0.355\linewidth, height=0.30\linewidth,",
+         r"  xmode=log, ymode=log, tick label style={font=\scriptsize}, label style={font=\scriptsize},",
+         r"  title style={font=\scriptsize, align=center}, ylabel style={yshift=-3pt}, grid=major, grid style={gray!20}, every axis plot/.append style={mark size=1.4pt}]"]
+    for i, (title, c, xl, ticks, k) in enumerate(panels):
+        sl = slope(c, "FCFP")
+        L.append(rf"\nextgroupplot[title={{{title}\\FCFP slope {sl:.1f}}}, xlabel={{{xl}}}, {ticks}" + (r", ylabel={Reduction time (s)}, ymax=100000" if i == 0 else "")
+                 + (r", legend to name=scallegend, legend columns=8, legend style={font=\scriptsize, draw=none}" if i == 0 else "") + "]")
         for meth in STYLE:
             if meth not in c:
                 continue
@@ -202,9 +231,14 @@ def scal_figure():
             L.append(rf"\addplot[{STYLE[meth]}] coordinates {{" + " ".join(f"({x},{y:.3f})" for x, y in pts.items()) + "};")
             if i == 0:
                 L.append(rf"\addlegendentry{{{meth}}}")
+        # slope of the FCFP curve on the log-log scale, written at its last point
+        if i == 0:
+            L.append(r"\addplot[red!70, densely dotted, thick, forget plot] coordinates {(2300,7200) (22000,7200)}"
+                     r" node[pos=1, above left, font=\scriptsize, text=red!70, inner sep=2pt] {2\,h limit};")
     L += [r"\end{groupplot}", r"\end{tikzpicture}", r"\\[2pt]\pgfplotslegendfromname{scallegend}",
-          r"\captionof{figure}{Mean reduction time against the number of objects $n$ (a, b) and of attributes $r$ (c), "
-          r"over three random subsamples per point. A missing point means that the method did not finish within two hours.}",
+          r"\captionof{figure}{Mean reduction time (log scale) against the number of objects (a, b) and of attributes (c), "
+          r"three random subsamples per point. Each title gives the slope of the FCFP curve; a slope of 2 means that the time grows as $n^2$. "
+          r"A method without a point at some size did not finish within two hours there (dotted line in (a)).}",
           r"\label{fig:scal}", r"\end{minipage}\par"]
     write(os.path.join(FIG, "scal.tex"), L)
     cs = {k: curve(s[s.dataset == k], "n") for k in ["letter", "magic"]}
@@ -242,8 +276,9 @@ def sens_figure():
             L.append(rf"\addplot[{st}] coordinates {{" + " ".join(f"({x},{v:.2f})" for x, v in p.items()) + "};")
             if i == 0:
                 L.append(rf"\addlegendentry{{{NAME[ds]}}}")
+        L.append(r"\draw[gray, dashed] (axis cs:0.3,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:0.3,\pgfkeysvalueof{/pgfplots/ymax});")
     L += [r"\end{groupplot}", r"\end{tikzpicture}", r"\\[2pt]\pgfplotslegendfromname{senslegend}",
-          r"\captionof{figure}{SVM accuracy and mean reduct size of FCFP against the scale $\delta$ ($k_\omega=5$, $\rho=0.95$).}",
+          r"\captionof{figure}{SVM accuracy and mean reduct size of FCFP against the kernel width $\delta$ ($k_\omega=5$, $\rho=0.95$). Dashed line: the default $\delta=0.3$.}",
           r"\label{fig:sens}", r"\end{minipage}\par"]
     write(os.path.join(FIG, "sens.tex"), L)
     rng = acc.max(axis=1) - acc.min(axis=1)
@@ -260,7 +295,7 @@ def screen_table():
         return None
     s = pd.read_csv(path)
     main = load_rows()
-    ds = ["arrhythmia", "semeion", "mfeat-factors", "madelon", "colon", "leukemia", "lung", "prostate", "gli85", "smk-can-187"]
+    ds = ["arrhythmia", "semeion", "mfeat-factors", "madelon", "isolet", "colon", "leukemia", "lung", "prostate", "gli85", "smk-can-187"]
     qs = [50, 100, 200, 500]
     cnt = s[s.status == "ok"].groupby(["dataset", "method"]).size()
     if not ((cnt == 10).all() and len(cnt) == len(ds) * len(qs)):

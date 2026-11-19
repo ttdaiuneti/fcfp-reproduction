@@ -3,40 +3,27 @@
 \captionof{table}{FCFP with the absolute scale $\delta=0.3$ and with $\delta$ set to $0.3$ times the median pairwise distance in $C$: SVM accuracy (\%) and mean reduct size. `--': not finished within one hour.}
 \label{tab:delta}
 \footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}lcccc@{}}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrr@{\hspace{14pt}}lrrrr@{}}
 \toprule
- & \multicolumn{2}{c}{$\delta=0.3$} & \multicolumn{2}{c}{median-based $\delta$} \\ \cmidrule(lr){2-3}\cmidrule(lr){4-5}
-Dataset & Acc. & $|R|$ & Acc. & $|R|$ \\
+ & \multicolumn{2}{c}{$\delta=0.3$} & \multicolumn{2}{c}{median-based} & & \multicolumn{2}{c}{$\delta=0.3$} & \multicolumn{2}{c}{median-based} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){7-8}\cmidrule(lr){9-10}
+Dataset & Acc. & $|R|$ & Acc. & $|R|$ & Dataset & Acc. & $|R|$ & Acc. & $|R|$ \\
 \midrule
-Wine & $98.3$ & $8.0$ & $98.9$ & $8.0$ \\
-Glass & $68.7$ & $7.8$ & $67.3$ & $6.9$ \\
-Heart & $55.4$ & $9.0$ & $57.4$ & $10.0$ \\
-Ecoli & $86.9$ & $5.0$ & $86.9$ & $5.0$ \\
-Dermatology & $95.1$ & $9.0$ & $97.3$ & $18.0$ \\
-Sonar & $76.4$ & $10.6$ & $79.3$ & $32.3$ \\
-Ionosphere & $92.6$ & $8.7$ & $92.3$ & $18.8$ \\
-\midrule
-Vehicle & $74.8$ & $13.0$ & $74.8$ & $13.0$ \\
-Yeast & $59.0$ & $7.0$ & $60.0$ & $6.0$ \\
-Segment & $94.2$ & $12.0$ & $94.2$ & $12.1$ \\
-Page-blocks & $94.3$ & $6.0$ & $94.1$ & $5.0$ \\
-\midrule
-Spambase & $93.1$ & $42.8$ & $93.1$ & $36.8$ \\
-Waveform & $81.7$ & $20.0$ & $82.8$ & $27.0$ \\
-Electrical & $96.5$ & $10.0$ & $96.3$ & $11.0$ \\
-\midrule
-Arrhythmia & $60.8$ & $14.0$ & $67.5$ & $58.7$ \\
-Semeion & $73.5$ & $16.1$ & $94.1$ & $118.7$ \\
-Mfeat-factors & $95.6$ & $15.6$ & $97.1$ & $140.2$ \\
-Madelon & $72.5$ & $17.0$ & $59.7$ & $149.7$ \\
-\midrule
-Colon & $80.7$ & $4.7$ & $88.6$ & $468.2$ \\
-Leukemia & $90.2$ & $4.8$ & $93.0$ & $1278.0$ \\
-Lung & $88.1$ & $6.7$ & $93.1$ & $598.2$ \\
-Prostate & $93.0$ & $4.9$ & $92.0$ & $1470.9$ \\
-GLI-85 & $85.7$ & $5.2$ & -- & -- \\
-SMK-CAN-187 & $69.5$ & $9.0$ & -- & -- \\
+Wine & $98.3$ & $8.0$ & $98.9$ & $8.0$ & Spambase & $93.1$ & $42.8$ & $93.1$ & $36.8$ \\
+Glass & $68.7$ & $7.8$ & $67.3$ & $6.9$ & Waveform & $81.7$ & $20.0$ & $82.8$ & $27.0$ \\
+Heart & $55.4$ & $9.0$ & $57.4$ & $10.0$ & Electrical & $96.5$ & $10.0$ & $96.3$ & $11.0$ \\
+Ecoli & $86.9$ & $5.0$ & $86.9$ & $5.0$ & Arrhythmia & $60.8$ & $14.0$ & $67.5$ & $58.7$ \\
+Dermatology & $95.1$ & $9.0$ & $97.3$ & $18.0$ & Semeion & $73.5$ & $16.1$ & $94.1$ & $118.7$ \\
+Sonar & $76.4$ & $10.6$ & $79.3$ & $32.3$ & Mfeat-factors & $95.6$ & $15.6$ & $97.1$ & $140.2$ \\
+Ionosphere & $92.6$ & $8.7$ & $92.3$ & $18.8$ & Madelon & $72.5$ & $17.0$ & $59.7$ & $149.7$ \\
+Vehicle & $74.8$ & $13.0$ & $74.8$ & $13.0$ & Isolet & $72.1$ & $15.1$ & -- & -- \\
+Yeast & $59.0$ & $7.0$ & $60.0$ & $6.0$ & Colon & $80.7$ & $4.7$ & $88.6$ & $468.2$ \\
+Segment & $94.2$ & $12.0$ & $94.2$ & $12.1$ & Leukemia & $90.2$ & $4.8$ & $93.0$ & $1278.0$ \\
+Page-blocks & $94.3$ & $6.0$ & $94.1$ & $5.0$ & Lung & $88.1$ & $6.7$ & $93.1$ & $598.2$ \\
+ & & & &  & Prostate & $93.0$ & $4.9$ & $92.0$ & $1470.9$ \\
+ & & & &  & GLI-85 & $85.7$ & $5.2$ & -- & -- \\
+ & & & &  & SMK-CAN-187 & $69.5$ & $9.0$ & -- & -- \\
 \bottomrule
 \end{tabular}
 \end{minipage}\par

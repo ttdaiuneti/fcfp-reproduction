@@ -1,6 +1,6 @@
 """Summary tables and tests for the main comparison.
 
-Input : results/r1/raw_long.csv + raw_long_b.csv (per-fold rows).
+Input : results/r1/raw_long.csv + raw_long_b.csv + raw_long_c.csv (Isolet) (per-fold rows).
 Output: results/r1/analysis/
   summary_<metric>.csv     mean and std over folds per (dataset, method); 'TO' = time-out
   size.csv, time.csv       mean |R| and mean reduction time (s)
@@ -9,7 +9,7 @@ Rules
   * empty reduct (NRS with delta = 0.15 on some sets): the classifier predicts the
     majority class of the training part; accuracy is computed on the test fold.
   * a (dataset, method) cell enters a test only if all 10 folds are ok.
-  * groups: 'all24' = methods that finish on every dataset; 'sfrs' = + SFRS on the
+  * groups: 'all' = all methods, on the datasets where all of them finish; 'sfrs' = + SFRS on the
     datasets where SFRS finishes; 'gbnrs' = + GBNRS (and SFRS) where both finish.
   * Friedman over datasets, Nemenyi CD (alpha = 0.05), Wilcoxon signed-rank of FCFP
     against each method with Holm correction; W/T/L with tie tolerance 0.005.
@@ -35,7 +35,7 @@ Q05 = {2: 1.960, 3: 2.343, 4: 2.569, 5: 2.728, 6: 2.850, 7: 2.949, 8: 3.031, 9: 
 
 
 def load_rows():
-    d = pd.concat([pd.read_csv(os.path.join(R, f)) for f in ("raw_long.csv", "raw_long_b.csv")]).reset_index(drop=True)
+    d = pd.concat([pd.read_csv(os.path.join(R, f)) for f in ("raw_long.csv", "raw_long_b.csv", "raw_long_c.csv") if os.path.exists(os.path.join(R, f))]).reset_index(drop=True)
     assert not d.duplicated(["dataset", "method", "fold"]).any()
     empty = (d.status == "ok") & (d["size"] == 0)
     for ds in d.loc[empty, "dataset"].unique():
@@ -100,7 +100,7 @@ def main():
     for metric in ("acc_mean", "acc_svm", "acc_knn"):
         pv = complete(d, metric)
         base = REDUCERS + RANKERS + ["Full"]
-        groups = {"all24": base, "reducers": REDUCERS + ["Full"],
+        groups = {"all": base, "reducers": REDUCERS + ["Full"],
                   "sfrs": REDUCERS + ["SFRS", "Full"], "gbnrs": REDUCERS + ["SFRS", "GBNRS", "Full"]}
         for name, cols in groups.items():
             ar, t, info = tests(pv[cols], name, metric)

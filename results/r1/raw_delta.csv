@@ -239,3 +239,13 @@ electrical,FCFP-med,6,9000,1000,12,ok,11,"[0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11]",0
 electrical,FCFP-med,7,9000,1000,12,ok,11,"[0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11]",0.961,0.847,0.9039999999999999,38.872748542000004,0.4304322919997503,
 electrical,FCFP-med,8,9000,1000,12,ok,11,"[0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11]",0.965,0.865,0.915,38.883358458,0.415995125000336,
 electrical,FCFP-med,9,9000,1000,12,ok,11,"[0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11]",0.966,0.838,0.9019999999999999,38.492919917,0.4018574580004497,
+isolet,FCFP-med,0,7017,780,617,timeout,,[],nan,nan,nan,3600.0,7.216699987111497e-05,cap 3600.0s
+isolet,FCFP-med,4,7017,780,617,timeout,,[],nan,nan,nan,nan,0.0,not run: fold 0 exceeded the cap
+isolet,FCFP-med,5,7017,780,617,timeout,,[],nan,nan,nan,nan,0.0,not run: fold 0 exceeded the cap
+isolet,FCFP-med,1,7017,780,617,timeout,,[],nan,nan,nan,nan,0.0,not run: fold 0 exceeded the cap
+isolet,FCFP-med,3,7017,780,617,timeout,,[],nan,nan,nan,nan,0.0,not run: fold 0 exceeded the cap
+isolet,FCFP-med,2,7017,780,617,timeout,,[],nan,nan,nan,nan,0.0,not run: fold 0 exceeded the cap
+isolet,FCFP-med,7,7018,779,617,timeout,,[],nan,nan,nan,nan,0.0,not run: fold 0 exceeded the cap
+isolet,FCFP-med,6,7017,780,617,timeout,,[],nan,nan,nan,nan,0.0,not run: fold 0 exceeded the cap
+isolet,FCFP-med,8,7018,779,617,timeout,,[],nan,nan,nan,nan,0.0,not run: fold 0 exceeded the cap
+isolet,FCFP-med,9,7018,779,617,timeout,,[],nan,nan,nan,nan,0.0,not run: fold 0 exceeded the cap

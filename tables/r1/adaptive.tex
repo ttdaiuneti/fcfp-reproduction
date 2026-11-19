@@ -1,20 +1,20 @@
 \begin{minipage}{\linewidth}
 \centering
-\captionof{table}{SVM accuracy (\%, mean $\pm$ std) and mean reduct size (in parentheses) with the weights $\omega_\alpha$. Algorithm~\ref{alg:forward-backward} and all other settings are unchanged; $\alpha=1$ is FCFP.}
+\captionof{table}{SVM accuracy (\%, mean $\pm$ std) and mean reduct size (in parentheses) with the weights $\omega_\alpha$. Algorithm~\ref{alg:forward-backward} and all other settings are unchanged. Bold: the search stopped after one attribute in most folds.}
 \label{tab:adaptive}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lccccc@{}}
 \toprule
  & \multicolumn{5}{c}{$\alpha$} \\ \cmidrule(lr){2-6}
-Dataset & $1$ & $0.75$ & $0.5$ & $0.25$ & $0$ \\
+Dataset & 1 (FCFP) & $0.75$ & $0.5$ & $0.25$ & 0 (adaptive) \\
 \midrule
-Glass & $68.7 \pm 5.8$ (7.8) & $68.7 \pm 7.6$ (7.0) & $68.7 \pm 7.6$ (7.0) & $57.3 \pm 15.5$ (5.2) & $36.0 \pm 5.9$ (1.0) \\
-Ecoli & $86.9 \pm 5.2$ (5.0) & $86.9 \pm 5.2$ (5.0) & $86.9 \pm 5.2$ (5.0) & $86.9 \pm 5.2$ (5.0) & $46.5 \pm 12.5$ (1.4) \\
-Yeast & $59.0 \pm 4.0$ (7.0) & $60.2 \pm 4.5$ (6.1) & $33.6 \pm 5.2$ (1.5) & $31.1 \pm 0.4$ (1.0) & $31.1 \pm 0.4$ (1.0) \\
+Glass & $68.7 \pm 5.8$ (7.8) & $68.7 \pm 7.6$ (7.0) & $68.7 \pm 7.6$ (7.0) & $57.3 \pm 15.5$ (5.2) & $\mathbf{36.0} \pm 5.9$ (\textbf{1.0}) \\
+Ecoli & $86.9 \pm 5.2$ (5.0) & $86.9 \pm 5.2$ (5.0) & $86.9 \pm 5.2$ (5.0) & $86.9 \pm 5.2$ (5.0) & $\mathbf{46.5} \pm 12.5$ (\textbf{1.4}) \\
+Yeast & $59.0 \pm 4.0$ (7.0) & $60.2 \pm 4.5$ (6.1) & $\mathbf{33.6} \pm 5.2$ (\textbf{1.5}) & $\mathbf{31.1} \pm 0.4$ (\textbf{1.0}) & $\mathbf{31.1} \pm 0.4$ (\textbf{1.0}) \\
 Vehicle & $74.8 \pm 3.5$ (13.0) & $74.7 \pm 3.4$ (12.3) & $74.8 \pm 3.4$ (12.0) & $74.8 \pm 3.4$ (12.0) & $74.3 \pm 3.4$ (12.0) \\
-Segment & $94.2 \pm 1.1$ (12.0) & $93.9 \pm 1.1$ (12.0) & $94.2 \pm 1.3$ (12.0) & $93.9 \pm 1.2$ (12.0) & $14.3 \pm 0.0$ (1.0) \\
-Page-blocks & $94.3 \pm 0.7$ (6.0) & $93.6 \pm 0.8$ (4.4) & $91.5 \pm 0.6$ (2.0) & $90.0 \pm 0.4$ (1.0) & $90.0 \pm 0.4$ (1.0) \\
+Segment & $94.2 \pm 1.1$ (12.0) & $93.9 \pm 1.1$ (12.0) & $94.2 \pm 1.3$ (12.0) & $93.9 \pm 1.2$ (12.0) & $\mathbf{14.3} \pm 0.0$ (\textbf{1.0}) \\
+Page-blocks & $94.3 \pm 0.7$ (6.0) & $93.6 \pm 0.8$ (4.4) & $91.5 \pm 0.6$ (2.0) & $\mathbf{90.0} \pm 0.4$ (\textbf{1.0}) & $\mathbf{90.0} \pm 0.4$ (\textbf{1.0}) \\
 \bottomrule
 \end{tabular}
 \end{minipage}\par

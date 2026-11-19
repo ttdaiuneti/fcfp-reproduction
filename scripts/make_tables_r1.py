@@ -31,13 +31,13 @@ MS = os.path.join(ROOT, "tables", "r1"); os.makedirs(MS, exist_ok=True)
 GROUPS = [("Small", ["wine", "glass", "heart", "ecoli", "dermatology", "sonar", "ionosphere"]),
           ("Medium", ["vehicle", "yeast", "segment", "page-blocks"]),
           ("Large $n$", ["spambase", "waveform", "electrical"]),
-          ("Large $r$", ["arrhythmia", "semeion", "mfeat-factors", "madelon"]),
+          ("Large $r$", ["arrhythmia", "semeion", "mfeat-factors", "madelon", "isolet"]),
           ("Gene expression", ["colon", "leukemia", "lung", "prostate", "gli85", "smk-can-187"])]
 ORDER = [d for _, g in GROUPS for d in g]
 NAME = {"wine": "Wine", "glass": "Glass", "heart": "Heart", "ecoli": "Ecoli", "dermatology": "Dermatology",
         "sonar": "Sonar", "ionosphere": "Ionosphere", "vehicle": "Vehicle", "yeast": "Yeast", "segment": "Segment",
         "page-blocks": "Page-blocks", "spambase": "Spambase", "waveform": "Waveform", "electrical": "Electrical",
-        "arrhythmia": "Arrhythmia", "semeion": "Semeion", "mfeat-factors": "Mfeat-factors", "madelon": "Madelon",
+        "arrhythmia": "Arrhythmia", "semeion": "Semeion", "mfeat-factors": "Mfeat-factors", "madelon": "Madelon", "isolet": "Isolet",
         "colon": "Colon", "leukemia": "Leukemia", "lung": "Lung", "prostate": "Prostate", "gli85": "GLI-85",
         "smk-can-187": "SMK-CAN-187"}
 RS = ["FCFP", "NRS", "FNRS", "SFRS", "GBNRS", "FGB", "WFRS"]
@@ -89,10 +89,10 @@ def size_table(d):
     mu = ok.groupby(["dataset", "method"])["size"].mean().unstack()
     sd = ok.groupby(["dataset", "method"])["size"].std().unstack()
     lines = [r"\begin{minipage}{\linewidth}", r"\centering",
-             r"\captionof{table}{Number of selected attributes (mean $\pm$ std over ten folds). $|C|$: all attributes. The selectors of Table~\ref{tab:acc-sel-svm} keep the number of attributes selected by FCFP in the same fold.}",
+             r"\captionof{table}{Number of selected attributes (mean $\pm$ std over ten folds). $r$: number of attributes. The selectors of Table~\ref{tab:acc-sel-svm} keep the number of attributes selected by FCFP in the same fold.}",
              r"\label{tab:size}", r"\resizebox{\linewidth}{!}{%", r"\scriptsize", r"\setlength{\tabcolsep}{3pt}",
              r"\begin{tabular}{@{}lr*{%d}{c}@{}}" % len(RS), r"\toprule",
-             r"Dataset & $|C|$ & " + " & ".join(RS) + r" \\", r"\midrule"]
+             r"Dataset & $r$ & " + " & ".join(RS) + r" \\", r"\midrule"]
     for gi, (_, ds_list) in enumerate(GROUPS):
         for ds in ds_list:
             m_all = int(d[(d.dataset == ds)].p.iloc[0])
@@ -122,7 +122,7 @@ def time_table(d):
              r"\captionof{table}{Reduction time in seconds per fold (mean $\pm$ std over ten folds; classifier training excluded). --: more than 1\,h on the first fold.}",
              r"\label{tab:runtime}", r"\resizebox{\linewidth}{!}{%", r"\scriptsize", r"\setlength{\tabcolsep}{3pt}",
              r"\begin{tabular}{@{}lrr*{%d}{c}@{}}" % len(RS), r"\toprule",
-             r"Dataset & $n$ & $|C|$ & " + " & ".join(RS) + r" \\", r"\midrule"]
+             r"Dataset & $n$ & $r$ & " + " & ".join(RS) + r" \\", r"\midrule"]
     for gi, (_, ds_list) in enumerate(GROUPS):
         for ds in ds_list:
             X, y = load(ds)
@@ -196,7 +196,7 @@ def main():
         key = "svm" if metric == "acc_svm" else "knn"
         out[f"acc-rs-{key}.tex"] = acc_table(
             d, metric, RS, f"tab:acc-rs-{key}",
-            rf"{cname} test accuracy (\%, mean $\pm$ std over ten folds) of the rough-set reducers. Full: all attributes. Bold: best reducer. --: more than 1\,h on the first fold.")
+            rf"{cname} test accuracy (\%, mean $\pm$ std over ten folds) of the rough-set reducers. Full: all attributes. Bold: best reducer. --: more than 1\,h on the first fold. The last two rows use only the methods that finished on all datasets.")
         out[f"acc-sel-{key}.tex"] = acc_table(
             d, metric, SEL, f"tab:acc-sel-{key}",
             rf"{cname} test accuracy (\%, mean $\pm$ std over ten folds) of FCFP and of selectors that keep the same number of attributes as FCFP. Bold: best selector.")

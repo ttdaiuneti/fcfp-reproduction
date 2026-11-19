@@ -1,13 +1,13 @@
 \begin{minipage}{\linewidth}
 \centering
-\captionof{table}{Monotonicity violations among 200 random nested pairs $B_1\subset B_2$ per dataset. The FCFP columns differ only in the weight $\omega_\alpha$; $\alpha=1$ is FCFP and $\alpha=0$ the adaptive scheme.}
+\captionof{table}{Monotonicity violations among 200 random nested pairs $B_1\subset B_2$ per dataset. The first five columns differ only in the weights $\omega_\alpha$ of Eq.~\eqref{eq:hybrid-omega}.}
 \label{tab:mono}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lccccccc@{}}
 \toprule
- & \multicolumn{5}{c}{FCFP with weights $\omega_\alpha$} & & \\ \cmidrule(lr){2-6}
-Dataset & $\alpha{=}1$ & $0.75$ & $0.5$ & $0.25$ & $0$ & WFRS & SFRS \\
+ & \multicolumn{5}{c}{weights $\omega_\alpha$, value of $\alpha$} & & \\ \cmidrule(lr){2-6}
+Dataset & 1 (FCFP) & $0.75$ & $0.5$ & $0.25$ & 0 (adaptive) & WFRS & SFRS \\
 \midrule
 Wine & 0 & 0 & 0 & 1 & 6 & 0 & 0 \\
 Glass & 0 & 5 & 8 & 15 & 21 & 15 & 0 \\
@@ -30,6 +30,7 @@ Arrhythmia & 0 & 0 & 2 & 9 & 9 & 0 & 0 \\
 Semeion & 0 & 24 & 28 & 31 & 32 & 0 & 0 \\
 Mfeat-factors & 0 & 3 & 4 & 5 & 6 & 0 & 0 \\
 Madelon & 0 & 0 & 2 & 3 & 3 & 2 & 0 \\
+Isolet & 0 & 0 & 0 & 5 & 8 & 0 & 0 \\
 \midrule
 Colon & 0 & 1 & 3 & 4 & 6 & 3 & 2 \\
 Leukemia & 0 & 0 & 1 & 2 & 4 & 2 & 1 \\
@@ -38,7 +39,7 @@ Prostate & 0 & 1 & 2 & 3 & 6 & 5 & 0 \\
 GLI-85 & 0 & 0 & 0 & 1 & 3 & 6 & 0 \\
 SMK-CAN-187 & 0 & 0 & 0 & 0 & 1 & 5 & 0 \\
 \midrule
-Datasets with a violation & 0 & 12 & 17 & 19 & 23 & 20 & 7 \\
+Datasets with a violation & 0 & 12 & 17 & 20 & 24 & 20 & 7 \\
 \bottomrule
 \end{tabular}
 \end{minipage}\par

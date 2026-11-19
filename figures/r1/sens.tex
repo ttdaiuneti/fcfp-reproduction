@@ -17,6 +17,7 @@
 \addlegendentry{Arrhythmia}
 \addplot[violet, mark=o] coordinates {(0.1,76.90) (0.2,80.71) (0.3,80.71) (0.4,85.71) (0.5,85.71)};
 \addlegendentry{Colon}
+\draw[gray, dashed] (axis cs:0.3,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:0.3,\pgfkeysvalueof{/pgfplots/ymax});
 \nextgroupplot[title={(b) Reduct size}, ylabel={$|R|$}]
 \addplot[black, mark=*] coordinates {(0.1,4.00) (0.2,5.50) (0.3,8.00) (0.4,10.00) (0.5,11.00)};
 \addplot[blue, mark=square*] coordinates {(0.1,4.00) (0.2,5.90) (0.3,8.70) (0.4,11.80) (0.5,14.90)};
@@ -24,9 +25,10 @@
 \addplot[green!50!black, mark=diamond*] coordinates {(0.1,6.00) (0.2,10.00) (0.3,12.00) (0.4,13.00) (0.5,14.00)};
 \addplot[orange!90!black, mark=pentagon*] coordinates {(0.1,6.00) (0.2,9.80) (0.3,14.00) (0.4,19.40) (0.5,26.80)};
 \addplot[violet, mark=o] coordinates {(0.1,2.30) (0.2,3.10) (0.3,4.70) (0.4,6.10) (0.5,8.10)};
+\draw[gray, dashed] (axis cs:0.3,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:0.3,\pgfkeysvalueof{/pgfplots/ymax});
 \end{groupplot}
 \end{tikzpicture}
 \\[2pt]\pgfplotslegendfromname{senslegend}
-\captionof{figure}{SVM accuracy and mean reduct size of FCFP against the scale $\delta$ ($k_\omega=5$, $\rho=0.95$).}
+\captionof{figure}{SVM accuracy and mean reduct size of FCFP against the kernel width $\delta$ ($k_\omega=5$, $\rho=0.95$). Dashed line: the default $\delta=0.3$.}
 \label{fig:sens}
 \end{minipage}\par
