@@ -1,0 +1,41 @@
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=3 by 1, horizontal sep=1.1cm}, width=0.37\linewidth, height=0.33\linewidth,
+  xmode=log, ymode=log, log basis x=10, tick label style={font=\scriptsize}, label style={font=\scriptsize},
+  title style={font=\scriptsize}, ylabel style={yshift=-3pt}, grid=major, grid style={gray!20}, every axis plot/.append style={mark size=1.4pt}]
+\nextgroupplot[title={(a) Letter, $r=16$}, xlabel={$n$}, ylabel={Reduction time (s)}, legend to name=scallegend, legend columns=7, legend style={font=\scriptsize, draw=none}]
+\addplot[black, very thick, mark=*] coordinates {(2500,5.966) (5000,23.948) (10000,87.544) (20000,305.123)};
+\addlegendentry{FCFP}
+\addplot[blue, mark=square*] coordinates {(2500,2.409) (5000,9.316) (10000,30.384) (20000,91.919)};
+\addlegendentry{NRS}
+\addplot[cyan!70!black, mark=triangle*] coordinates {(2500,3.119) (5000,12.390) (10000,47.056) (20000,171.613)};
+\addlegendentry{FNRS}
+\addplot[orange!90!black, mark=diamond*] coordinates {(2500,917.360) (5000,5249.878)};
+\addlegendentry{SFRS}
+\addplot[red, mark=pentagon*] coordinates {(2500,423.600) (5000,1476.631) (10000,2829.652)};
+\addlegendentry{GBNRS}
+\addplot[green!50!black, mark=x] coordinates {(2500,1.725) (5000,4.853) (10000,7.012) (20000,11.626)};
+\addlegendentry{FGB}
+\addplot[violet, mark=o] coordinates {(2500,50.623) (5000,209.044) (10000,829.359) (20000,3246.409)};
+\addlegendentry{WFRS}
+\nextgroupplot[title={(b) Magic, $r=10$}, xlabel={$n$}]
+\addplot[black, very thick, mark=*] coordinates {(2500,2.573) (5000,11.205) (10000,40.933) (19020,125.157)};
+\addplot[blue, mark=square*] coordinates {(2500,1.031) (5000,4.397) (10000,13.395) (19020,33.024)};
+\addplot[cyan!70!black, mark=triangle*] coordinates {(2500,1.674) (5000,7.392) (10000,28.078) (19020,76.082)};
+\addplot[orange!90!black, mark=diamond*] coordinates {(2500,14.846) (5000,95.812) (10000,412.428) (19020,841.321)};
+\addplot[red, mark=pentagon*] coordinates {(2500,86.009) (5000,398.700) (10000,1061.588) (19020,3433.846)};
+\addplot[green!50!black, mark=x] coordinates {(2500,0.966) (5000,2.506) (10000,3.899) (19020,7.219)};
+\addplot[violet, mark=o] coordinates {(2500,4.151) (5000,17.783) (10000,67.494) (19020,201.598)};
+\nextgroupplot[title={(c) SMK-CAN-187, $n=187$}, xlabel={$r$}]
+\addplot[black, very thick, mark=*] coordinates {(1000,1.841) (2500,5.029) (5000,10.824) (10000,23.721) (19993,47.030)};
+\addplot[blue, mark=square*] coordinates {(1000,0.500) (2500,1.350) (5000,2.824) (10000,6.276) (19993,12.047)};
+\addplot[cyan!70!black, mark=triangle*] coordinates {(1000,0.543) (2500,1.552) (5000,3.279) (10000,7.394) (19993,13.919)};
+\addplot[green!50!black, mark=x] coordinates {(1000,10.470) (2500,30.585) (5000,66.740) (10000,125.256) (19993,319.134)};
+\addplot[violet, mark=o] coordinates {(1000,4.861) (2500,12.176) (5000,23.268) (10000,47.426) (19993,98.284)};
+\end{groupplot}
+\end{tikzpicture}
+\\[2pt]\pgfplotslegendfromname{scallegend}
+\captionof{figure}{Mean reduction time against the number of objects $n$ (a, b) and of attributes $r$ (c), over three random subsamples per point. A missing point means that the method did not finish within two hours.}
+\label{fig:scal}
+\end{minipage}\par

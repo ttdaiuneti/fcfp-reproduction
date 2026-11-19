@@ -1,0 +1,32 @@
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1, horizontal sep=1.4cm}, width=0.5\linewidth, height=0.36\linewidth,
+  xlabel={$\delta$}, xtick={0.1,0.2,0.3,0.4,0.5}, tick label style={font=\scriptsize}, label style={font=\scriptsize},
+  title style={font=\scriptsize}, grid=major, grid style={gray!20}, every axis plot/.append style={mark size=1.4pt}]
+\nextgroupplot[title={(a) SVM accuracy}, ylabel={Accuracy (\%)}, legend to name=senslegend, legend columns=6, legend style={font=\scriptsize, draw=none}]
+\addplot[black, mark=*] coordinates {(0.1,96.08) (0.2,97.78) (0.3,98.33) (0.4,98.33) (0.5,97.78)};
+\addlegendentry{Wine}
+\addplot[blue, mark=square*] coordinates {(0.1,90.88) (0.2,90.87) (0.3,92.60) (0.4,93.44) (0.5,94.58)};
+\addlegendentry{Ionosphere}
+\addplot[red, mark=triangle*] coordinates {(0.1,65.25) (0.2,74.47) (0.3,74.83) (0.4,75.65) (0.5,75.42)};
+\addlegendentry{Vehicle}
+\addplot[green!50!black, mark=diamond*] coordinates {(0.1,93.20) (0.2,94.50) (0.3,94.20) (0.4,94.11) (0.5,94.03)};
+\addlegendentry{Segment}
+\addplot[orange!90!black, mark=pentagon*] coordinates {(0.1,58.19) (0.2,60.17) (0.3,60.85) (0.4,61.94) (0.5,64.81)};
+\addlegendentry{Arrhythmia}
+\addplot[violet, mark=o] coordinates {(0.1,76.90) (0.2,80.71) (0.3,80.71) (0.4,85.71) (0.5,85.71)};
+\addlegendentry{Colon}
+\nextgroupplot[title={(b) Reduct size}, ylabel={$|R|$}]
+\addplot[black, mark=*] coordinates {(0.1,4.00) (0.2,5.50) (0.3,8.00) (0.4,10.00) (0.5,11.00)};
+\addplot[blue, mark=square*] coordinates {(0.1,4.00) (0.2,5.90) (0.3,8.70) (0.4,11.80) (0.5,14.90)};
+\addplot[red, mark=triangle*] coordinates {(0.1,6.10) (0.2,10.50) (0.3,13.00) (0.4,14.00) (0.5,15.00)};
+\addplot[green!50!black, mark=diamond*] coordinates {(0.1,6.00) (0.2,10.00) (0.3,12.00) (0.4,13.00) (0.5,14.00)};
+\addplot[orange!90!black, mark=pentagon*] coordinates {(0.1,6.00) (0.2,9.80) (0.3,14.00) (0.4,19.40) (0.5,26.80)};
+\addplot[violet, mark=o] coordinates {(0.1,2.30) (0.2,3.10) (0.3,4.70) (0.4,6.10) (0.5,8.10)};
+\end{groupplot}
+\end{tikzpicture}
+\\[2pt]\pgfplotslegendfromname{senslegend}
+\captionof{figure}{SVM accuracy and mean reduct size of FCFP against the scale $\delta$ ($k_\omega=5$, $\rho=0.95$).}
+\label{fig:sens}
+\end{minipage}\par

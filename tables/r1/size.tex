@@ -1,0 +1,43 @@
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{Number of selected attributes (mean $\pm$ std over ten folds). $|C|$: all attributes. The selectors of Table~\ref{tab:acc-sel-svm} keep the number of attributes selected by FCFP in the same fold.}
+\label{tab:size}
+\resizebox{\linewidth}{!}{%
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lr*{7}{c}@{}}
+\toprule
+Dataset & $|C|$ & FCFP & NRS & FNRS & SFRS & GBNRS & FGB & WFRS \\
+\midrule
+Wine & 13 & $8.0 \pm 0.0$ & $5.3 \pm 0.5$ & $3.9 \pm 0.3$ & $7.2 \pm 2.2$ & $9.7 \pm 2.5$ & $7.9 \pm 2.8$ & $7.2 \pm 0.4$ \\
+Glass & 9 & $7.8 \pm 0.4$ & $8.8 \pm 0.4$ & $6.0 \pm 0.0$ & $8.0 \pm 2.1$ & $7.3 \pm 0.8$ & $3.5 \pm 1.1$ & $7.5 \pm 2.2$ \\
+Heart & 13 & $9.0 \pm 0.0$ & $10.9 \pm 0.6$ & $5.0 \pm 0.0$ & $8.7 \pm 2.9$ & $11.1 \pm 0.9$ & $6.1 \pm 2.4$ & $1.0 \pm 0.0$ \\
+Ecoli & 7 & $5.0 \pm 0.0$ & $6.0 \pm 0.0$ & $4.9 \pm 0.3$ & $5.5 \pm 0.5$ & $5.9 \pm 0.3$ & $4.0 \pm 1.2$ & $5.0 \pm 0.0$ \\
+Dermatology & 33 & $9.0 \pm 0.0$ & $10.1 \pm 0.3$ & $8.0 \pm 0.5$ & $20.0 \pm 6.2$ & $20.9 \pm 1.8$ & $8.1 \pm 2.7$ & $13.4 \pm 1.0$ \\
+Sonar & 60 & $10.6 \pm 0.5$ & $6.5 \pm 0.5$ & $4.0 \pm 0.0$ & $33.0 \pm 14.8$ & $54.9 \pm 2.3$ & $2.4 \pm 1.3$ & $14.5 \pm 0.7$ \\
+Ionosphere & 34 & $8.7 \pm 0.5$ & $8.9 \pm 0.6$ & $5.2 \pm 0.4$ & $5.8 \pm 1.5$ & $16.4 \pm 6.9$ & $3.7 \pm 1.3$ & $1.0 \pm 0.0$ \\
+\midrule
+Vehicle & 18 & $13.0 \pm 0.0$ & $14.0 \pm 0.9$ & $6.0 \pm 0.0$ & $16.6 \pm 1.6$ & $16.4 \pm 1.2$ & $6.7 \pm 2.2$ & $17.0 \pm 0.0$ \\
+Yeast & 8 & $7.0 \pm 0.0$ & $8.0 \pm 0.0$ & $6.0 \pm 0.0$ & $7.7 \pm 0.5$ & $7.1 \pm 0.7$ & $3.5 \pm 2.0$ & $6.0 \pm 0.0$ \\
+Segment & 19 & $12.0 \pm 0.0$ & $15.1 \pm 1.2$ & $6.0 \pm 0.0$ & $4.2 \pm 1.9$ & $14.7 \pm 1.6$ & $6.3 \pm 2.5$ & $11.0 \pm 0.0$ \\
+Page-blocks & 10 & $6.0 \pm 0.0$ & $9.8 \pm 0.4$ & $6.0 \pm 0.0$ & $9.2 \pm 0.8$ & $6.4 \pm 1.0$ & $4.1 \pm 3.0$ & $1.0 \pm 0.0$ \\
+\midrule
+Spambase & 57 & $42.8 \pm 0.6$ & $55.7 \pm 0.5$ & $15.0 \pm 0.0$ & $55.5 \pm 1.3$ & $54.1 \pm 1.9$ & $11.3 \pm 3.5$ & $6.5 \pm 0.5$ \\
+Waveform & 40 & $20.0 \pm 0.0$ & $1.2 \pm 3.8$ & $6.0 \pm 0.0$ & $39.9 \pm 0.3$ & $38.1 \pm 0.9$ & $5.3 \pm 1.3$ & $15.8 \pm 0.4$ \\
+Electrical & 12 & $10.0 \pm 0.0$ & $0.0 \pm 0.0$ & $6.0 \pm 0.0$ & $9.0 \pm 0.0$ & $10.3 \pm 0.8$ & $3.5 \pm 0.5$ & $1.0 \pm 0.0$ \\
+\midrule
+Arrhythmia & 279 & $14.0 \pm 0.5$ & $13.0 \pm 1.2$ & $5.0 \pm 0.0$ & $83.8 \pm 57.0$ & -- & $10.9 \pm 2.6$ & $13.3 \pm 0.5$ \\
+Semeion & 256 & $16.1 \pm 0.7$ & $0.0 \pm 0.0$ & $16.8 \pm 0.8$ & -- & -- & $60.4 \pm 4.6$ & $17.0 \pm 0.0$ \\
+Mfeat-factors & 216 & $15.6 \pm 0.5$ & $9.1 \pm 0.3$ & $5.6 \pm 0.5$ & -- & -- & $6.7 \pm 6.1$ & $10.1 \pm 0.3$ \\
+Madelon & 500 & $17.0 \pm 0.0$ & $11.5 \pm 0.5$ & $5.2 \pm 0.4$ & -- & -- & $7.8 \pm 1.5$ & $9.7 \pm 6.8$ \\
+\midrule
+Colon & 2000 & $4.7 \pm 0.5$ & $3.2 \pm 0.4$ & $3.0 \pm 0.0$ & $13.2 \pm 16.0$ & -- & $1.2 \pm 0.6$ & $7.2 \pm 0.8$ \\
+Leukemia & 7129 & $4.8 \pm 0.4$ & $3.8 \pm 0.4$ & $3.0 \pm 0.0$ & $34.4 \pm 18.7$ & -- & $1.3 \pm 0.5$ & $8.0 \pm 1.1$ \\
+Lung & 3312 & $6.7 \pm 0.5$ & $4.9 \pm 0.3$ & $4.0 \pm 0.0$ & -- & -- & $6.8 \pm 3.3$ & $8.0 \pm 1.3$ \\
+Prostate & 5966 & $4.9 \pm 0.3$ & $3.5 \pm 0.5$ & $3.0 \pm 0.0$ & $10.7 \pm 5.9$ & -- & $9.9 \pm 4.6$ & $9.1 \pm 2.2$ \\
+GLI-85 & 22283 & $5.2 \pm 0.4$ & $3.1 \pm 0.3$ & $3.0 \pm 0.0$ & -- & -- & $1.9 \pm 2.2$ & $6.0 \pm 0.0$ \\
+SMK-CAN-187 & 19993 & $9.0 \pm 0.0$ & $6.0 \pm 0.0$ & $4.0 \pm 0.0$ & -- & -- & $4.1 \pm 1.9$ & $7.4 \pm 1.1$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{minipage}\par

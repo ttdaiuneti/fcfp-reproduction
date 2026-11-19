@@ -1,0 +1,25 @@
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{FCFP against each method: datasets where both finished ($N$), wins/ties/losses of FCFP (tie: within 0.5 points) and Holm-adjusted Wilcoxon $p$-values, per classifier.}
+\label{tab:pairwise}
+\small
+\begin{tabular}{@{}lrcccc@{}}
+\toprule
+ & & \multicolumn{2}{c}{SVM} & \multicolumn{2}{c}{3-NN} \\ \cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Method & $N$ & W/T/L & $p_{\mathrm{Holm}}$ & W/T/L & $p_{\mathrm{Holm}}$ \\
+\midrule
+NRS & 24 & 11/8/5 & $0.257$ & 12/8/4 & $0.048$ \\
+FNRS & 24 & 20/1/3 & $0.004$ & 17/5/2 & $0.005$ \\
+SFRS & 18 & 5/4/9 & $0.837$ & 4/5/9 & $1.000$ \\
+GBNRS & 14 & 2/8/4 & $1.000$ & 2/6/6 & $0.608$ \\
+FGB & 24 & 22/1/1 & $<0.001$ & 21/1/2 & $<0.001$ \\
+WFRS & 24 & 14/4/6 & $0.257$ & 12/5/7 & $0.443$ \\
+mRMR & 24 & 7/8/9 & $1.000$ & 8/8/8 & $1.000$ \\
+ReliefF & 24 & 5/8/11 & $1.000$ & 8/6/10 & $1.000$ \\
+L1 & 24 & 6/7/11 & $1.000$ & 8/3/13 & $1.000$ \\
+AFRSFCV & 24 & 12/6/6 & $0.361$ & 8/7/9 & $1.000$ \\
+Random & 24 & 23/0/1 & $<0.001$ & 19/2/3 & $0.003$ \\
+Full & 24 & 3/9/12 & $0.361$ & 7/6/11 & $1.000$ \\
+\bottomrule
+\end{tabular}
+\end{minipage}\par

@@ -1,0 +1,15 @@
+dataset,method,fold,n_train,n_test,p,status,size,reduct,acc_svm,acc_knn,acc_mean,time_reduct,time_eval,note,superseded_reason
+electrical,GBNRS,2,9000,1000,12,timeout,,[],,,,3600.0,5.558300017582951e-05,cap 3600.0s,fold over 1 h after the first fold finished; rerun with a 2 h limit
+electrical,GBNRS,3,9000,1000,12,timeout,,[],,,,3600.0,4.024999998364365e-05,cap 3600.0s,fold over 1 h after the first fold finished; rerun with a 2 h limit
+electrical,GBNRS,4,9000,1000,12,timeout,,[],,,,3600.0,5.504199998540571e-05,cap 3600.0s,fold over 1 h after the first fold finished; rerun with a 2 h limit
+waveform,GBNRS,8,4500,500,40,timeout,,[],,,,3600.0,6.354099969030358e-05,cap 3600.0s,fold over 1 h after the first fold finished; rerun with a 2 h limit
+semeion,FCFPscr@50,0,1433,160,256,ok,1.0,[6],0.1875,0.13125,0.159375,1.150324,0.0329562499999998,,raw_screen.csv: run with an extra stop on zero gain that is not in Algorithm 1; rerun
+semeion,FCFPscr@50,1,1433,160,256,ok,1.0,[6],0.1875,0.1,0.14375,1.250936625,0.0330824999999777,,raw_screen.csv: run with an extra stop on zero gain that is not in Algorithm 1; rerun
+semeion,FCFPscr@50,2,1433,160,256,ok,1.0,[6],0.1875,0.1,0.14375,1.257761959,0.0336029579999603,,raw_screen.csv: run with an extra stop on zero gain that is not in Algorithm 1; rerun
+semeion,FCFPscr@50,3,1434,159,256,ok,1.0,[6],0.1823899371069182,0.1320754716981132,0.1572327044025157,1.2800872500000002,0.0333652089999532,,raw_screen.csv: run with an extra stop on zero gain that is not in Algorithm 1; rerun
+semeion,FCFPscr@50,4,1434,159,256,ok,1.0,[6],0.1823899371069182,0.10062893081761,0.1415094339622641,1.222132542,0.0327673330000379,,raw_screen.csv: run with an extra stop on zero gain that is not in Algorithm 1; rerun
+semeion,FCFPscr@50,5,1434,159,256,ok,1.0,[6],0.1823899371069182,0.10062893081761,0.1415094339622641,1.180330125,0.0359904169999936,,raw_screen.csv: run with an extra stop on zero gain that is not in Algorithm 1; rerun
+semeion,FCFPscr@50,6,1434,159,256,ok,1.0,[6],0.1886792452830188,0.10062893081761,0.1446540880503145,1.158498709,0.0334020830000554,,raw_screen.csv: run with an extra stop on zero gain that is not in Algorithm 1; rerun
+semeion,FCFPscr@50,7,1434,159,256,ok,1.0,[6],0.1886792452830188,0.10062893081761,0.1446540880503145,1.1558465,0.0338219589998516,,raw_screen.csv: run with an extra stop on zero gain that is not in Algorithm 1; rerun
+semeion,FCFPscr@50,8,1434,159,256,ok,1.0,[6],0.1698113207547169,0.1383647798742138,0.1540880503144654,1.159197083,0.0329117909998331,,raw_screen.csv: run with an extra stop on zero gain that is not in Algorithm 1; rerun
+semeion,FCFPscr@50,9,1434,159,256,ok,1.0,[6],0.1886792452830188,0.10062893081761,0.1446540880503145,1.1154912499999998,0.0337688330000673,,raw_screen.csv: run with an extra stop on zero gain that is not in Algorithm 1; rerun

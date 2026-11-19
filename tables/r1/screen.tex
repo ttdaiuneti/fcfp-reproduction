@@ -1,0 +1,24 @@
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{SVM accuracy (\%) and mean reduct size (in parentheses) of FCFP after keeping the $q$ attributes with the largest ANOVA $F$ statistic on the training part. `=': $q\ge r$, so no attribute is removed.}
+\label{tab:screen}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrccccc@{}}
+\toprule
+ & & \multicolumn{4}{c}{$q$} & \\ \cmidrule(lr){3-6}
+Dataset & $r$ & $50$ & $100$ & $200$ & $500$ & no screening \\
+\midrule
+Arrhythmia & 279 & $69.9$ (23.8) & $66.8$ (19.0) & $62.8$ (14.4) & = & $60.8$ (14.0) \\
+Semeion & 256 & $73.1$ (17.3) & $74.8$ (15.9) & $76.4$ (16.2) & = & $73.5$ (16.1) \\
+Mfeat-factors & 216 & $96.0$ (21.0) & $95.7$ (17.8) & $95.1$ (15.3) & = & $95.6$ (15.6) \\
+Madelon & 500 & $65.4$ (19.0) & $64.9$ (18.0) & $65.9$ (17.3) & = & $72.5$ (17.0) \\
+Colon & 2000 & $83.8$ (5.3) & $83.8$ (5.0) & $82.4$ (4.9) & $80.7$ (4.8) & $80.7$ (4.7) \\
+Leukemia & 7129 & $91.6$ (5.1) & $92.9$ (4.9) & $94.3$ (5.2) & $91.6$ (5.1) & $90.2$ (4.8) \\
+Lung & 3312 & $86.7$ (14.6) & $87.6$ (9.1) & $91.1$ (7.1) & $90.1$ (6.8) & $88.1$ (6.7) \\
+Prostate & 5966 & $91.1$ (5.0) & $92.1$ (5.0) & $94.0$ (5.0) & $91.0$ (5.0) & $93.0$ (4.9) \\
+GLI-85 & 22283 & $84.3$ (5.3) & $84.6$ (5.3) & $84.4$ (5.5) & $85.7$ (5.2) & $85.7$ (5.2) \\
+SMK-CAN-187 & 19993 & $65.2$ (11.0) & $64.2$ (10.4) & $63.7$ (9.7) & $67.3$ (9.2) & $69.5$ (9.0) \\
+\bottomrule
+\end{tabular}
+\end{minipage}\par
